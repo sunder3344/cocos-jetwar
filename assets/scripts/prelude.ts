@@ -24,7 +24,7 @@ export class prelude extends Component {
     }
 
 	onStartButton() {
-		//Òş²Ø¸Ãcanvas£¬¿ªÊ¼ÓÎÏ·
+		//éšè—è¯¥canvasï¼Œå¼€å§‹æ¸¸æˆ
 		this.node.active = false;
 		if (this._playerCtrl._isPlaying == 0) {
 			cc.game.resume();
@@ -40,4 +40,5 @@ export class prelude extends Component {
 		this._playerCtrl._isPlaying = 1;
 	}
 }
-
+
+

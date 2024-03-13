@@ -8,12 +8,12 @@ export class player extends Component {
 	private _loadRes: number = 0;
 	private _bulletPos: Vec3 = new Vec3();
 	private _enemyJet: Prefab|null = null;
-	private _enemyFrequency: number = 1;		//Ã¿1Ãë²úÉúÒ»¼ÜµĞ»ú
+	private _enemyFrequency: number = 1;		//æ¯1ç§’äº§ç”Ÿä¸€æ¶æ•Œæœº
 	private _playCollide: PolygonCollider2D = null;
 	private _score: number = 0;
 	private _freqChange: number = 0;
 	private _bulletFreq: number = 0.5;
-	private _isPlaying: number = 0;			//0£ºµÚÒ»´Î½øÈëÓÎÏ·£»1£ºÕıÔÚ¿ªÊ¼£»-1£ºËÀÍö
+	private _isPlaying: number = 0;			//0ï¼šç¬¬ä¸€æ¬¡è¿›å…¥æ¸¸æˆï¼›1ï¼šæ­£åœ¨å¼€å§‹ï¼›-1ï¼šæ­»äº¡
 
     start() {
 		if (this._loadRes == this._totalRes) {
@@ -31,7 +31,7 @@ export class player extends Component {
 		if (this._playCollide) {
 			this._playCollide.on(Contact2DType.BEGIN_CONTACT, this.onPlayerCollisionBegin, this);
 		}
-		//¼ÓÔØPrefab
+		//åŠ è½½Prefab
 		resources.load("bullet1", Prefab, (err, prefab) => {
 			if (err) {
 				console.log("load prefab error!");
@@ -59,7 +59,8 @@ export class player extends Component {
 	touchMove(event: EventTouch) {
 		//console.log(event.getLocation());
 		//console.log(event.target.parent.getComponent(UITransform).convertToNodeSpaceAR(new Vec3(event.getLocationX(), event.getLocationY(), 0)));
-		this.node.setPosition(event.target.parent.getComponent(UITransform).convertToNodeSpaceAR(new Vec3(event.getLocationX(), event.getLocationY(), 0)));
+		//this.node.setPosition(event.target.parent.getComponent(UITransform).convertToNodeSpaceAR(new Vec3(event.getLocationX(), event.getLocationY(), 0)));
+		this.node.setPosition(event.target.parent.getComponent(UITransform).convertToNodeSpaceAR(new Vec3(event.getUILocation().x, event.getUILocation().y, 0)));
 	}
 
 	shot() {
@@ -78,13 +79,13 @@ export class player extends Component {
 	}
 
 	onPlayerCollisionBegin(selfCollider: Collider2D, otherCollider: Collider2D, contact: IPhysics2DContact | null) {
-		if (otherCollider.tag == 1) {		//±»µĞ»ú×²µ½
+		if (otherCollider.tag == 1) {		//è¢«æ•Œæœºæ’åˆ°
 			/*resources.load("hero1_die", cc.ImageAsset, (err, bundle) => {
 				this.node.getComponent(cc.Sprite).spriteFrame = cc.SpriteFrame.createWithImage(bundle);
 			});*/
-			//ÓÎÏ·½áÊø
+			//æ¸¸æˆç»“æŸ
 			//cc.game.pause();
-			//³¡¾°ÖØÔØ
+			//åœºæ™¯é‡è½½
 			//cc.director.loadScene("mainScene");
 			this._isPlaying = -1;
 			cc.find("prelude/scorePanel").getComponent(Label).string = this._score;
@@ -95,4 +96,5 @@ export class player extends Component {
 		}
 	}
 }
-
+
+

@@ -34,14 +34,14 @@ export class bullet extends Component {
     }
 
 	onCollisionBegin(selfCollider: Collider2D, otherCollider: Collider2D, contact: IPhysics2DContact | null) {
-		if (otherCollider.tag == 1) {		//´òµ½µĞ»ú
-			//Ïú»ÙµĞ»ú
+		if (otherCollider.tag == 1) {		//æ‰“åˆ°æ•Œæœº
+			//é”€æ¯æ•Œæœº
 			this._enemyCtrl = otherCollider.getComponent(enemy);
 			this._enemyCtrl.die();
 			this.node.destroy();
 			this.addScore(1);
 
-			//ÅĞ¶Ï·ÖÊı£¬Èç¹û´óÓÚ10¼Ü£¬Ôö¼ÓÆµÂÊ
+			//åˆ¤æ–­åˆ†æ•°ï¼Œå¦‚æœå¤§äº10æ¶ï¼Œå¢åŠ é¢‘ç‡
 			this._playerCtrl = cc.find("Canvas/hero1").getComponent(player);
 			if (this._playerCtrl._score == 10) {
 				this._playerCtrl._enemyFrequency = 0.8;
@@ -55,7 +55,7 @@ export class bullet extends Component {
 			} else if (this._playerCtrl._score == 40) {
 				this._playerCtrl._enemyFrequency = 0.2;
 				this._playerCtrl._freqChange = 1;
-			} else if (this._playerCtrl._score == 50) {		//´òµô50¼Ü£¬Ö±½ÓµØÓü¼¶£¬×Óµ¯ÉäËÙÒ²Ôö¼Ó
+			} else if (this._playerCtrl._score == 50) {		//æ‰“æ‰50æ¶ï¼Œç›´æ¥åœ°ç‹±çº§ï¼Œå­å¼¹å°„é€Ÿä¹Ÿå¢åŠ 
 				this._playerCtrl._enemyFrequency = 0.1;
 				this._playerCtrl._freqChange = 2;
 				this._playerCtrl._bulletFreq = 0.2;
@@ -68,7 +68,7 @@ export class bullet extends Component {
 				this._playerCtrl.unschedule(this._playerCtrl.spawnEnemyJet);
 				this._playerCtrl.schedule(this._playerCtrl.spawnEnemyJet, this._playerCtrl._enemyFrequency);
 			}
-			if (this._playerCtrl._freqChange == 2) {		//×Óµ¯ÉäËÙÔö¼ÓÒ»±¶
+			if (this._playerCtrl._freqChange == 2) {		//å­å¼¹å°„é€Ÿå¢åŠ ä¸€å€
 				this._playerCtrl.unschedule(this._playerCtrl.shot, this._playerCtrl._bulletFreq);
 				this._playerCtrl.schedule(this._playerCtrl.shot, this._playerCtrl._bulletFreq);
 			}
@@ -76,11 +76,12 @@ export class bullet extends Component {
 	}
 
 	addScore(score: number) {
-		//·ÖÊı¼Ó1
+		//åˆ†æ•°åŠ 1
 		this._playerCtrl = cc.find("Canvas/hero1").getComponent(player);
 		this._playerCtrl._score += score;
 		//console.log(this._playerCtrl._score);
 		cc.find("Canvas/score").getComponent(Label).string = this._playerCtrl._score;
 	}
 }
-
+
+
