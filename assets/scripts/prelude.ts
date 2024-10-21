@@ -29,13 +29,12 @@ export class prelude extends Component {
 		if (this._playerCtrl._isPlaying == 0) {
 			cc.game.resume();
 		} else if (this._playerCtrl._isPlaying == -1) {
-			//cc.director.loadScene("mainScene");
-			this._playerCtrl._bulletFreq = 0.5;
-			this._playerCtrl._enemyFrequency = 1;
-			this._playerCtrl._score = 0;
+			cc.director.loadScene("mainScene");
+			/*this._playerCtrl.player_init();
 			cc.find("Canvas/score").getComponent(Label).string = this._playerCtrl._score;
+			cc.find("Canvas/life").getComponent(Label).string = this._playerCtrl._heroLife;
 			this._playerCtrl.start();
-			this._playerCtrl.node.active = true;
+			this._playerCtrl.node.active = true;*/
 		}
 		this._playerCtrl._isPlaying = 1;
 	}
